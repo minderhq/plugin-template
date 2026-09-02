@@ -22,7 +22,11 @@ class TemplatePlugin(PluginBase):
 
     # ── what this plugin needs from the platform (optional) ───────────────────
     # e.g. {"services": ["influxdb"], "bundles": ["rag"]}
-    REQUIRES = {"services": [], "optional_services": [], "bundles": []}
+    REQUIRES: dict[str, list[str]] = {
+        "services": [],
+        "optional_services": [],
+        "bundles": [],
+    }
 
     # ── runtime-editable config, rendered as a form in the client (optional) ──
     CONFIG_SCHEMA = [

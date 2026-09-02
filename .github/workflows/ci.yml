@@ -24,6 +24,11 @@ jobs:
         run: |
           black --check .
           flake8 --max-line-length=100 --extend-ignore=E203,W503 .
+      - name: Type-check
+        # mypy>=1.8 + [tool.mypy] already ship in pyproject; run it so the
+        # scaffold's promised type-checking is actually enforced (a plugin
+        # scaffolded from this template inherits a working, not no-op, mypy).
+        run: mypy .
       - name: Validate against the plugin contract
         run: minder-plugin validate plugin.py
       - name: Test
