@@ -68,3 +68,29 @@ class TemplatePlugin(PluginBase):
         #
         self._last = {"greeting": getattr(self, "template_greeting", "hello")}
         return self._last
+
+    # ── OR make it a "Talent": an AI tool the LLM can call ────────────────────
+    # A plugin doesn't have to collect data — it can expose a capability the model
+    # calls by name (function-calling). That's a "Talent", the unit the
+    # marketplace sells. To turn this into one, uncomment the block below (and set
+    # DISPLAY["category"] = "ai-tool"), then delete collect_data if you don't need
+    # a stored series:
+    #
+    #     ACTIONS = frozenset({"greet"})
+    #     READ_ONLY_ACTIONS = frozenset({"greet"})  # reachable via GET, unauth
+    #     AI_TOOLS = [
+    #         {
+    #             "name": "greet",
+    #             "description": "Greet someone by name.",
+    #             "parameters": {
+    #                 "type": "object",
+    #                 "properties": {"name": {"type": "string"}},
+    #                 "required": ["name"],
+    #             },
+    #             "action": "greet",   # must name a method below (in ACTIONS)
+    #             "method": "GET",
+    #         },
+    #     ]
+    #
+    #     async def greet(self, name: str) -> dict:
+    #         return {"message": f"Hello, {name}!"}
