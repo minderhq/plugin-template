@@ -14,7 +14,7 @@ authors = [{ name = "you" }]
 # The SDK is the only required dependency. Until it's on PyPI, install from git.
 # Add your own runtime deps here too (e.g. "httpx>=0.27").
 dependencies = [
-    "minder-plugin-sdk @ git+https://github.com/minderhq/plugin-sdk@v0.1.2",
+    "minder-plugin-sdk @ git+https://github.com/minderhq/plugin-sdk@v0.1.4",
 ]
 
 [project.optional-dependencies]
