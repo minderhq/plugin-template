@@ -3,9 +3,17 @@ name: CI
 on:
   push:
     branches: [main]
+    paths-ignore: [ '**/*.md' ]
   pull_request:
     branches: [main]
+    paths-ignore: [ '**/*.md' ]
   workflow_dispatch:
+
+# Cancel a superseded run of THIS workflow on the same ref instead of piling
+# a redundant one onto whatever runner pool this repo (or a fork of it) uses.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
