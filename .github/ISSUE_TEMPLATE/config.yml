@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: minderhq/plugin-sdk
+    url: https://github.com/minderhq/plugin-sdk
+    about: If this is about the SDK itself rather than this template, it may belong there instead.
+  - name: minderhq/plugins (the plugin catalog)
+    url: https://github.com/minderhq/plugins
+    about: Finished a plugin from this template? Submit it to the catalog, not here.

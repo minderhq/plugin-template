@@ -1,0 +1,19 @@
+name: Feature request
+description: Propose an improvement to the template's scaffolding, CI, or docs
+title: "[feature]: "
+type: Feature
+labels: ["status:triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What would make this template a better starting point for new plugin authors?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
