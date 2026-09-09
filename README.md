@@ -3,6 +3,10 @@
 A starter for building a [**Minder**](https://github.com/minderhq/minder) plugin,
 wired against the [**plugin-sdk**](https://github.com/minderhq/plugin-sdk).
 
+New to Minder plugins? Read the
+[authoring guide](https://minderhq.github.io/docs/plugins/authoring/) and the
+[contract reference](https://minderhq.github.io/docs/plugins/contract/) on the docs site.
+
 > Click **“Use this template”** on GitHub to create your own repo from this one.
 
 ## What you get
