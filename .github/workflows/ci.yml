@@ -39,5 +39,9 @@ jobs:
         run: mypy .
       - name: Validate against the plugin contract
         run: minder-plugin validate plugin.py
+      - name: Validate the webhook example manifest
+        # Keep the manifest+webhook example (examples/webhook_manifest.yaml)
+        # honest: enforce it against the same validator on every push.
+        run: minder-plugin validate examples/webhook_manifest.yaml
       - name: Test
         run: pytest -q

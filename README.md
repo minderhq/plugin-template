@@ -16,6 +16,11 @@ New to Minder plugins? Read the
   `collect_data` stub to fill in.
 - [`tests/test_plugin.py`](tests/test_plugin.py) — contract tests using the SDK's
   `check_plugin` / `run_lifecycle` harness.
+- [`examples/`](examples/) — the other plugin shape: a **manifest + webhook**
+  example ([`webhook_manifest.yaml`](examples/webhook_manifest.yaml) +
+  [`webhook_plugin.py`](examples/webhook_plugin.py)) for third-party integrations
+  that install at runtime instead of compiling code into Minder. See
+  [`examples/README.md`](examples/README.md) for which shape to pick.
 - CI that lints, runs `minder-plugin validate`, and tests on every push.
 
 ## Quick start
