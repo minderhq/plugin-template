@@ -18,7 +18,17 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "black>=24", "flake8>=7", "mypy>=1.8"]
+# pyyaml + jsonschema let `minder-plugin validate` parse and fully check the
+# YAML manifest example (examples/webhook_manifest.yaml); without them the SDK
+# can't read the manifest at all.
+dev = [
+    "pytest>=8",
+    "black>=24",
+    "flake8>=7",
+    "mypy>=1.8",
+    "pyyaml>=6",
+    "jsonschema>=4",
+]
 
 [tool.black]
 line-length = 88
