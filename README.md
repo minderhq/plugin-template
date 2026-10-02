@@ -1,6 +1,6 @@
 # Minder plugin template
 
-A starter for building a [**Minder**](https://github.com/minderhq/minder) plugin,
+A starter for building a [**Minder**](https://minderhq.github.io/www/) plugin,
 wired against the [**plugin-sdk**](https://github.com/minderhq/plugin-sdk).
 
 New to Minder plugins? Read the

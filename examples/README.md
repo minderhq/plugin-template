@@ -1,7 +1,8 @@
 # Examples: two plugin shapes
 
 Minder plugins come in two shapes, and picking the right one first saves a
-rewrite. The [runtime-plugin-loading ADR][adr] (Recommendation point 2) is
+rewrite. Minder's runtime-plugin-loading architecture decision (summarised in
+the [SDK decision guide][guide]) is
 explicit: **third-party plugins are _installed_, not compiled in, and run no
 arbitrary uploaded code.** So if you are a third party integrating an external
 system, reach for the **manifest + webhook** shape below; write an **in-process
@@ -44,7 +45,5 @@ reviewed — it is not something a third party uploads and Minder executes.
 
 - The SDK's decision guide with a worked example of each shape:
   [`minderhq/plugin-sdk` › `docs/plugins/webhook-vs-code-plugin.md`][guide].
-- [runtime-plugin-loading ADR][adr] — the recommendation this example mirrors.
 
-[adr]: https://github.com/minderhq/adrs/blob/main/decisions/runtime-plugin-loading.md
 [guide]: https://github.com/minderhq/plugin-sdk/blob/main/docs/plugins/webhook-vs-code-plugin.md

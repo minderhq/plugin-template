@@ -20,33 +20,13 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      # SHA-pinned; pins Python via UV_PYTHON and activates a venv outside the
-      # checkout (so black/flake8/mypy never scan it) for `uv pip install`.
-      - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
-        with:
-          python-version: "3.12"
-          activate-environment: true
-          venv-path: ${{ runner.temp }}/venv
-          enable-cache: true
-          cache-dependency-glob: pyproject.toml
-      - run: uv pip install -e ".[dev]"
-      - name: Lint
-        run: |
-          black --check .
-          flake8 --max-line-length=100 --extend-ignore=E203,W503 .
-      - name: Type-check
-        # mypy>=1.8 + [tool.mypy] already ship in pyproject; run it so the
-        # scaffold's promised type-checking is actually enforced (a plugin
-        # scaffolded from this template inherits a working, not no-op, mypy).
-        run: mypy .
-      - name: Validate against the plugin contract
-        run: minder-plugin validate plugin.py
-      - name: Validate the webhook example manifest
-        # Keep the manifest+webhook example (examples/webhook_manifest.yaml)
-        # honest: enforce it against the same validator on every push.
-        run: minder-plugin validate examples/webhook_manifest.yaml
-      - name: Test
-        run: pytest -q
+    # Shared lint -> type-check -> test pipeline (always GitHub-hosted):
+    # minderhq/.github/.github/workflows/python-ci.yml. Repo-specific checks
+    # that need the installed environment are passed in below.
+    uses: minderhq/.github/.github/workflows/python-ci.yml@main
+    with:
+      # The scaffold's own plugin and the manifest+webhook example
+      # (examples/webhook_manifest.yaml) must both pass the contract validator.
+      pre-test-run: |
+        minder-plugin validate plugin.py
+        minder-plugin validate examples/webhook_manifest.yaml
