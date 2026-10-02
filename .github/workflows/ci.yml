@@ -22,7 +22,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # SHA-pinned; pins Python via UV_PYTHON and activates a venv outside the
       # checkout (so black/flake8/mypy never scan it) for `uv pip install`.
       - uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
