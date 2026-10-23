@@ -1,13 +1,14 @@
 # Examples: two plugin shapes
 
 Minder plugins come in two shapes, and picking the right one first saves a
-rewrite. Minder's runtime-plugin-loading architecture decision (summarised in
-the [SDK decision guide][guide]) is
-explicit: **third-party plugins are _installed_, not compiled in, and run no
-arbitrary uploaded code.** So if you are a third party integrating an external
-system, reach for the **manifest + webhook** shape below; write an **in-process
-code plugin** only when the behaviour is genuinely first-party and must run
-inside the platform.
+rewrite. the [SDK decision guide][guide] has the details.
+A plugin is either **reviewed Python code**, merged to the catalog by pull
+request, or a **declarative manifest** that runs no plugin code. Both run
+isolated, out of process, in a `plugin-runner`, and no user-uploaded code runs.
+AI tools declare an `effect`, and write/send/destructive ones pause for user
+approval. If you are integrating an external system, start with the
+**manifest + webhook** shape below; write a **code plugin** when you need Python
+logic.
 
 ## 1. Manifest + webhook (the third-party default)
 
@@ -15,7 +16,7 @@ Files here:
 
 - [`webhook_manifest.yaml`](webhook_manifest.yaml) — a declarative manifest that
   tells Minder to expose an inbound webhook path and pipe each delivery into the
-  vector store. **No code is compiled into the platform** and it **installs at
+  vector store. **It runs no plugin code** and it **installs at
   runtime**. Your third-party code (if any) runs on _your_ own infra and is
   reached via this webhook.
 - [`webhook_plugin.py`](webhook_plugin.py) — an optional, tiny `handle_webhook`
@@ -34,12 +35,12 @@ Validate the manifest the same way CI does:
 minder-plugin validate examples/webhook_manifest.yaml
 ```
 
-## 2. In-process code plugin (first-party only)
+## 2. Code plugin (reviewed, merged by pull request)
 
 The [`../plugin.py`](../plugin.py) at the repo root is the code-plugin shape: a
-Python class the registry loads and drives through a lifecycle, running **inside**
-the platform. Because it runs in-process it is built into a Minder deployment and
-reviewed — it is not something a third party uploads and Minder executes.
+Python class the registry drives through a lifecycle, hosted by a `plugin-runner`
+(isolated, out of process). It is reviewed and merged into the catalog by pull
+request — it is not something a user uploads and Minder executes.
 
 ## See also
 
